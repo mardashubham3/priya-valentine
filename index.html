@@ -132,6 +132,21 @@ font-family:'Great Vibes';
 font-size:32px;
 color:#d63384;
 }
+  @keyframes flyCupid {
+  0% { left:-100px; }
+  100% { left:40%; }
+}
+
+@keyframes fadeIn {
+  from { opacity:0; }
+  to { opacity:1; }
+}
+
+@keyframes heartPop {
+  0% { transform:scale(0); opacity:0; }
+  70% { transform:scale(1.3); opacity:1; }
+  100% { transform:scale(1); }
+}
 </style>
 </head>
 
@@ -160,6 +175,26 @@ color:#d63384;
   </button>
 
 </div>
+<!-- INTRO ANIMATION -->
+<section id="intro" style="height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; position:relative; overflow:hidden;">
+
+  <div id="cupid" style="font-size:60px; position:absolute; left:-100px; top:30%;">
+    🧚‍♂️
+  </div>
+
+  <h1 id="valentineText" style="font-family:'Great Vibes'; font-size:60px; color:#d63384; opacity:0;">
+    Happy Valentine’s Day
+  </h1>
+
+  <div id="bigHeart" style="font-size:120px; margin-top:20px; opacity:0;">
+    ❤️
+  </div>
+
+  <div id="priyaName" style="font-size:80px; color:#ff1a66; font-weight:bold; opacity:0; transform:scale(0);">
+    ❤️ PRIYA ❤️
+  </div>
+
+</section>
 
 <!-- MUSIC -->
 <audio id="bgMusic" loop>
@@ -169,6 +204,28 @@ color:#d63384;
 
 <!-- Floating hearts -->
 <script>
+  function startIntro(){
+
+let cupid = document.getElementById("cupid");
+let text = document.getElementById("valentineText");
+let heart = document.getElementById("bigHeart");
+let name = document.getElementById("priyaName");
+
+cupid.style.animation = "flyCupid 3s forwards";
+
+setTimeout(()=>{
+  text.style.animation = "fadeIn 2s forwards";
+}, 2000);
+
+setTimeout(()=>{
+  heart.style.animation = "fadeIn 1s forwards";
+}, 4000);
+
+setTimeout(()=>{
+  name.style.animation = "heartPop 1s forwards";
+}, 5500);
+
+}
 setInterval(()=>{
 let heart=document.createElement("div");
 heart.className="floating-heart";
@@ -425,6 +482,7 @@ if(pass === "16112025"){
   let music = document.getElementById("bgMusic");
   music.volume = 0.6;
   music.play().catch(error => {
+    startIntro();
     console.log("Autoplay blocked:", error);
   });
 
@@ -447,3 +505,4 @@ document.getElementById("secretMessage").style.display = "block";
 
 </body>
 </html>
+
